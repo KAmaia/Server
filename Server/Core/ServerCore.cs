@@ -6,18 +6,24 @@ using System.Threading.Tasks;
 
 using Eventing.Library.Impl;
 using Server.Core.ServerEvents;
+using Eventing.Library;
 
 namespace Server.Core {
 	class ServerCore {
-		private EventManager em;
+		private EventManager eventManager;
 		public ServerCore(EventManager em ) {
-			this.em = em;
-			em.StartReceiving<ServerStartEvent>(@event => this.StartUp( @event ) );
+			eventManager = em;
+			StartReceiving( );
 		}
 
 		private void StartUp( ServerStartEvent @event ) {
 			Console.WriteLine( @event.Message );
 		}
+
+		private void StartReceiving( ) {
+			eventManager.StartReceiving<ServerStartEvent>( @event => this.StartUp( @event ) );
+		}
+
 
 
 	}

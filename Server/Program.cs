@@ -15,8 +15,8 @@ namespace Server {
 		static void Main( string[ ] args ) {
 			var synchronizationContext = new SingleThreadSynchronizationContext( "Client" );
 			var eventManager = new EventManager(new MessageBus());
-			ServerCore server = new ServerCore(eventManager);
 			SynchronizationContext.SetSynchronizationContext( synchronizationContext );
+			ServerCore server = new ServerCore(eventManager);
 			eventManager.RaiseEvent( new ServerStartEvent( ) );
 		}
 	}
